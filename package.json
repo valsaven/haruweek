@@ -1,0 +1,22 @@
+{
+  "name": "haruweek",
+  "version": "1.0.0",
+  "description": "Everyday hairstyles👧",
+  "main": "haruweek.js",
+  "scripts": {
+    "start": "node ./haruweek.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valsaven/haruweek.git"
+  },
+  "author": "Val Saven <val.saven@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valsaven/haruweek/issues"
+  },
+  "homepage": "https://github.com/valsaven/haruweek#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
