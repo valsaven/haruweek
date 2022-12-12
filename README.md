@@ -4,13 +4,12 @@
 Everyday hairstyles👧
 
 ## Getting Started
-```
-$ npm i
-$ npm start
+```bash
+npm start
 ```
 
 ## Usage
 Go to http://localhost:3000
 
 ## Online Demo
-https://evening-citadel-70217.herokuapp.com/
+https://haruweek.onrender.com/

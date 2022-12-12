@@ -1,12 +1,24 @@
-const express = require('express');
-const app = express();
+const http = require('http');
+const fileSystem = require('fs');
+const path = require('path');
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log('Listening on port 3000...'));
+console.log(`Listening on port ${port}...`);
 
-const today = new Date().getDay();
+const requestListener = function (req, res) {
+  const today = new Date().getDay();
 
-app.get('/', function (req, res) {
-  res.sendfile(`public/${today}.jpg`);
-});
+  const filePath = path.join(__dirname, `public/${today}.jpg`);
+  const stat = fileSystem.statSync(filePath);
+
+  res.writeHead(200, {
+    'Content-Type': 'image/jpeg',
+    'Content-Length': stat.size
+  });
+
+  const readStream = fileSystem.createReadStream(filePath);
+  readStream.pipe(res);
+}
+
+http.createServer(requestListener).listen(port);
