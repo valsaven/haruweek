@@ -4,22 +4,16 @@ import { promises as fsPromises, createReadStream } from 'fs';
 
 const port = process.env.PORT || 3000;
 
-console.log(`Listening on port ${port}...`);
-
-const setHeaders = (res, contentType, contentLength) => {
-  res.writeHead(200, {
-    'Content-Type': contentType,
-    'Content-Length': contentLength
-  });
-};
-
 const requestListener = async (req, res) => {
   const today = new Date().getDay();
   const filePath = path.join(process.cwd(), `public/${today}.jpg`);
 
   try {
     const stat = await fsPromises.stat(filePath);
-    setHeaders(res, 'image/jpeg', stat.size);
+    res.writeHead(200, {
+      'Content-Type': 'image/jpeg',
+      'Content-Length': stat.size
+    });
 
     const readStream = createReadStream(filePath);
     readStream.pipe(res);
@@ -31,4 +25,6 @@ const requestListener = async (req, res) => {
   }
 };
 
-http.createServer(requestListener).listen(port);
+http.createServer(requestListener).listen(port, () => {
+  console.log(`Listening on port ${port}...`);
+});
